@@ -127,3 +127,5 @@ Como etapa final a criação do Dashboard utilizando o Power-bi, lembrando que p
 
 
 ![12](https://github.com/pand-eX/Rox-Case/blob/main/assets/12.png)
+
+FIM
