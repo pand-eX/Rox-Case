@@ -4,7 +4,7 @@ Pelo fato de não ter certo e errado no case eu irei ser criativo e tentar mescl
 
 
 
-![1]
+![1](https://github.com/pand-eX/Rox-Case/blob/main/assets/1.png)
 
 
 
@@ -29,14 +29,14 @@ S3 para colocar os arquivos que serão carregados no DW, EIP para ter um IP excl
 A arquitetura do DW na AWS pode ser dividida em duas etapas. Primeiro a arquitetura do Cluster Amazon Redshift.
 
 
-![2]
+![2](https://github.com/pand-eX/Rox-Case/blob/main/assets/2.png)
 
 Em Segundo, a arquitetura de acesso ao cluster Redshift, para que os usuários tenham acesso ao DW.
 
 
 
 
-![3]
+![3](https://github.com/pand-eX/Rox-Case/blob/main/assets/3.png)
 
 
 
@@ -46,7 +46,7 @@ Em questão de Escalabilidade e versionamento o Redshift é muito bacana irei de
 
 
 
-![4]
+![4](https://github.com/pand-eX/Rox-Case/blob/main/assets/4.png)
 
 
 
@@ -57,7 +57,7 @@ Primeira Etapa é a criação do Cluster Redshift. Ela é simples lembrando que 
 
 
 
-![5]
+![5](https://github.com/pand-eX/Rox-Case/blob/main/assets/5.png)
 
 
 
@@ -69,7 +69,7 @@ Link: https://www.sql-workbench.eu/download-archive.html
 ## Configurando
 
 
-![6]
+![6](https://github.com/pand-eX/Rox-Case/blob/main/assets/6.png)
 
 
 
@@ -78,7 +78,7 @@ Quando você tentar conecta recebera um Timed out porque precisa de mais uma eta
 
 
 
-![7]
+![7](https://github.com/pand-eX/Rox-Case/blob/main/assets/7.png)
 
 
 E Por fim é entrar no Cluster criar as tabelas e seus relacionamento e criar também e conectar a ferramenta de BI como power-bi se for desejo da infraestrutura. 
@@ -86,13 +86,13 @@ Obs: Script estão em anexo !!!
 
 
 
-![8]
+![8](https://github.com/pand-eX/Rox-Case/blob/main/assets/8.png)
 
 
 Agora vem a parte que é o desafio da Rox a ingestão dos dados para o DW.  Uma das coisas que a Amazon recomenda e que os dados ou seja, os arquivos estejam em um repositório internamente dentro da prória AWS e irei utilizar para isso o Amazon S3.
 
 
-![9]
+![9](https://github.com/pand-eX/Rox-Case/blob/main/assets/9.png)
 
 
 Agora é basicamente copiar do S3 para nossas tabelas no Amazon Redshift.
@@ -101,10 +101,11 @@ Para usar o comando copy para enviar os dados do s3 para o redshift vai precisar
 Então precisamos Cria o IAM Role
 
 
-![10]
+![10](https://github.com/pand-eX/Rox-Case/blob/main/assets/10.png)
 
 
 E usaremos o comando copy para fazer esse envio de dados ficando basicamente:
+
 
 copy rw_customer (Nome da tabela do destino lá do Redshift)
 from 's3://awsdwrox/Sales.Customer.csv' (Aqui é o nome do Bucket s3 que você criou com o nome do arquivo)
@@ -112,13 +113,17 @@ iam_role 'arn:aws:iam::069732112377:role/awsdwredshifts3' (IAM Role que foi cria
 region 'us-east-2'(região que você está usando os serviços)
 delimiter ',' (delimitador do arquivo)
 
+
 E Pronto carregado no destino os dados, agora é só fazer as consultar e conectar a ferramenta de BI para visualização.
 Agora vem a parte que eu usei a criatividade e adicionei outra nuvem a GCP, haha !!! Am vez de utilizar o Amazon Redshift como DW irei migrar para o BigQuery na plataforma de nuvem GCP(Google Cloud Plataform).
 Se eu fosse utilizar esse mesmo exemplo que fiz com AWS no GCP basicamente muda alguns aspectos de cloud para cloud, mas a lógica é praticamente a mesma, a GCP também fala que uma boa prática e ter os dados armazenados internamente na nuvem e para isso podemos utilizar Cloud Storage como bucket e depois fazer a ingestão para o BigQuery. Portanto ao invez de fazer essa etapa de adicionar os dados em um Backup da GCP na hora da ingestão dos dados na Bigquery tem uma opção de S3 Amazon então foi basicamente o que eu fiz, usei o S3 da amazon como bucket e joguei os dados para um dw na GCP o BigQuery.
 
 
-![11]
+![11](https://github.com/pand-eX/Rox-Case/blob/main/assets/11.png)
+
+
 
 Como etapa final a criação do Dashboard utilizando o Power-bi, lembrando que pode ser usado Tableau e outros.
 
-![12]
+
+![12](https://github.com/pand-eX/Rox-Case/blob/main/assets/12.png)
