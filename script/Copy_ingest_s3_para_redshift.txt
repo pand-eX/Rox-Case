@@ -1,0 +1,5 @@
+copy rw_customer (Nome da tabela do destino lá do Redshift) 
+from 's3://awsdwrox/Sales.Customer.csv' (Aqui é o nome do Bucket s3 que você criou com o nome do arquivo) 
+iam_role 'arn:aws:iam::069732112377:role/awsdwredshifts3' (IAM Role que foi criado) 
+region 'us-east-2'(região que você está usando os serviços) 
+delimiter ',' (delimitador do arquivo)

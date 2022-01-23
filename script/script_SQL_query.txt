@@ -1,0 +1,53 @@
+1 ) Escreva uma query que retorna a quantidade de linhas na tabela Sales.SalesOrderDetail pelo campo SalesOrderID, desde que tenham pelo menos três linhas de detalhes.
+
+SELECT SalesOrderID, 
+COUNT(*) AS q 
+FROM `our-truth-338918.rox.rw_SalesOrderDetail`
+GROUP BY SalesOrderID
+HAVING q >= 3
+
+2)Escreva uma query que ligue as tabelas Sales.SalesOrderDetail, Sales.SpecialOfferProduct e Production.Product e retorne os 3 produtos (Name) mais vendidos (pela soma de OrderQty), agrupados pelo número de dias para manufatura (DaysToManufacture).
+
+SELECT * FROM(
+  SELECT p.DaysToManufacture,
+         ROW_NUMBER() OVER(PARTITION BY p.DaysToManufacture ORDER BY sum(sod.OrderQty) DESC) as r,
+         p.Name as name,
+         sum(sod.OrderQty) AS qtd
+  FROM Sales.`our-truth-338918.rox.rw_SpecialOfferProduct` AS sop 
+  INNER JOIN `our-truth-338918.rox.rw_Product` AS p ON sop.ProductID = p.ProductID
+  INNER JOIN `our-truth-338918.rox.rw_SalesOrderDetail` AS sod ON sop.SpecialOfferID = sod.SalesOrderDetailID
+  GROUP BY name
+  ) as by_pos
+WHERE r <= 3
+
+
+3) Escreva uma query ligando as tabelas Person.Person, Sales.Customer e Sales.SalesOrderHeader de forma a obter uma lista de nomes de clientes e uma contagem de pedidos efetuados.
+
+SELECT c.CustomerID, 
+       CONCAT(p.FirstName, ' ', p.LastName) as name, 
+       COUNT(*) AS qtd 
+FROM `our-truth-338918.rox.rw_SalesOrderHeader` as soh
+INNER JOIN	`our-truth-338918.rox.rw_Customer` as c ON soh.CustomerID = c.CustomerID
+INNER JOIN `our-truth-338918.rox.rw_Person` as p ON c.PersonID = p.BusinessEntityID 
+GROUP BY c.PersonID
+ORDER BY qtd DESC
+
+4) Escreva uma query usando as tabelas Sales.SalesOrderHeader, Sales.SalesOrderDetail e Production.Product, de forma a obter a soma total de produtos (OrderQty) por ProductID e OrderDate.
+
+SELECT d.ProductID, 
+       p.Name as name,
+       sum(OrderQty) OVER(PARTITION BY d.ProductID) AS qtd_id,
+       h.OrderDate,  
+       sum(OrderQty) OVER(PARTITION BY h.OrderDate) AS qtd_OrderDate
+FROM Sales.SalesOrderDetail AS d
+INNER JOIN Sales.SalesOrderHeader as h ON d.SalesOrderID  = h.SalesOrderID 
+INNER JOIN Production.Products AS p ON d.ProductID = p.ProductID 
+GROUP BY d.ProductID, h.OrderDate
+ORDER BY h.OrderDate
+
+5)Escreva uma query mostrando os campos SalesOrderID, OrderDate e TotalDue da tabela Sales.SalesOrderHeader. Obtenha apenas as linhas onde a ordem tenha sido feita durante o mês de setembro/2011 e o total devido esteja acima de 1.000. Ordene pelo total devido decrescente.
+
+SELECT SalesOrderID, DATE(OrderDate), TotalDue 
+FROM SalesOrderHeader
+WHERE DATE(OrderDate) BETWEEN DATE('2011-09-01') AND DATE('2011-09-30') AND TotalDue > 1.000
+ORDER BY TotalDue DESC
