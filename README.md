@@ -67,6 +67,7 @@ Na página da amazona diz que o amazon redshift foi feito para trabalhar com qua
 Link: https://www.sql-workbench.eu/download-archive.html
 
 ## Configurando
+OBS: Colocar Amazon Redshift no lugar do Apache Derby Network no DRIVE**
 
 
 ![6](https://github.com/pand-eX/Rox-Case/blob/main/assets/6.png)
