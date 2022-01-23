@@ -105,19 +105,20 @@ Então precisamos Cria o IAM Role
 ![10](https://github.com/pand-eX/Rox-Case/blob/main/assets/10.png)
 
 
-E usaremos o comando copy para fazer esse envio de dados ficando basicamente:
+E usaremos o comando copy para fazer esse envio de dados do s3 para o Amazon Redshift!!!!
+obs: o Script está em Anexo !!!
 
-
-copy rw_customer (Nome da tabela do destino lá do Redshift)
-from 's3://awsdwrox/Sales.Customer.csv' (Aqui é o nome do Bucket s3 que você criou com o nome do arquivo)
-iam_role 'arn:aws:iam::069732112377:role/awsdwredshifts3' (IAM Role que foi criado)
-region 'us-east-2'(região que você está usando os serviços)
-delimiter ',' (delimitador do arquivo)
 
 
 E Pronto carregado no destino os dados, agora é só fazer as consultar e conectar a ferramenta de BI para visualização.
+
+Obs: Script das query está em anexo !!!
+
+
+
 Agora vem a parte que eu usei a criatividade e adicionei outra nuvem a GCP, haha !!! Am vez de utilizar o Amazon Redshift como DW irei migrar para o BigQuery na plataforma de nuvem GCP(Google Cloud Plataform).
 Se eu fosse utilizar esse mesmo exemplo que fiz com AWS no GCP basicamente muda alguns aspectos de cloud para cloud, mas a lógica é praticamente a mesma, a GCP também fala que uma boa prática e ter os dados armazenados internamente na nuvem e para isso podemos utilizar Cloud Storage como bucket e depois fazer a ingestão para o BigQuery. Portanto ao invez de fazer essa etapa de adicionar os dados em um Backup da GCP na hora da ingestão dos dados na Bigquery tem uma opção de S3 Amazon então foi basicamente o que eu fiz, usei o S3 da amazon como bucket e joguei os dados para um dw na GCP o BigQuery.
+
 
 
 ![11](https://github.com/pand-eX/Rox-Case/blob/main/assets/11.png)
