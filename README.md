@@ -1,6 +1,6 @@
 ## Case Rox !!! Projeto !!! 
 
-Pelo fato de não ter certo e errado no case eu irei ser criativo e tentar mesclar nuvens e ferramentas. Irei desenvolver um Data Warehouse, podendo ser feito até um data marts que seriam pequenos DW segmentado para cada área da empresa, exemplo: RH, Finanças, Marketing e etc... Vou utilizar duas nuvens AWS e GCP.
+Pelo fato de não ter certo e errado no case eu irei ser criativo e tentar mesclar nuvens e ferramentas. Irei desenvolver um Data Warehouse, podendo ser feito até um data marts que seria pequenos DW segmentado para cada área da empresa, exemplo: RH, Finanças, Marketing e etc... Vou utilizar duas nuvens AWS e GCP.
 
 
 
